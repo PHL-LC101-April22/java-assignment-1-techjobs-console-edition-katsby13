@@ -79,7 +79,7 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toLowerCase().contains(value.toLowerCase())) {
                 jobs.add(row);
             }
         }
@@ -98,8 +98,19 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        // TODO - implement this method
-        return null;
+        ArrayList<HashMap<String, String>> selectedJobs = new ArrayList<>();
+
+        for (HashMap<String, String> job :allJobs) {
+            for (String item : job.keySet()) {
+                String newValue = job.get(item);
+                if (newValue.toLowerCase().contains(value.toLowerCase())){
+                    selectedJobs.add(job);
+                    break;
+                }
+            }
+
+        }
+        return selectedJobs;
     }
 
     /**
